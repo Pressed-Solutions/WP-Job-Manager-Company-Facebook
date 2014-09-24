@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Job Manager - Company Facebook
-Plugin URI: https://github.com/pressedsolutions/wp-job-manager-company-facebook
+Plugin URI: https://github.com/Pressed-Solutions/WP-Job-Manager-Company-Facebook
 Description: Adds a company Facebook URL field to the Job Data when posting a new job.
 Version: 1.0.
 Author: Andrew Minion
