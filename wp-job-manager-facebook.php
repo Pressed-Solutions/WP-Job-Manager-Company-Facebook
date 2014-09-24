@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Adds a company Facebook field
  */
-add_filter( 'submit_job_form_fields', 'wpjmcq_add_facebook' );
-function wpjmcq_add_facebook() {
+add_filter( 'submit_job_form_fields', 'wpjbFB_add_facebook' );
+function wpjbFB_add_facebook() {
     $fields['job']['company_facebook'] = array(
         'label' => __( 'Company Facebook', 'job_manager' ),
         'type' => 'text',
@@ -34,13 +34,13 @@ function wpjmcq_add_facebook() {
     return $fields;
 }
 // save submitted info
-add_action( 'job_manager_update_job_data', 'wpjmcq_add_facebook_save', 10, 2 );
-function wpjmcq_add_facebook_save( $job_id, $values ) {
+add_action( 'job_manager_update_job_data', 'wpjbFB_add_facebook_save', 10, 2 );
+function wpjbFB_add_facebook_save( $job_id, $values ) {
     update_post_meta( $job_id, '_company_facebook', $values['job']['company_facebook'] );
 }
 // add to admin metaboxes
-add_filter( 'job_manager_job_listing_data_fields', 'wpjmcq_admin_add_facebook' );
-function wpjmcq_admin_add_facebook( $fields ) {
+add_filter( 'job_manager_job_listing_data_fields', 'wpjbFB_admin_add_facebook' );
+function wpjbFB_admin_add_facebook( $fields ) {
     $fields['_company_facebook'] = array(
         'label' => __( 'Company Facebook', 'job_manager' ),
         'type' => 'text',
