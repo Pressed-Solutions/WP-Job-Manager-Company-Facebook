@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Job Manager - Company Facebook
-Plugin URI: https://github.com/pressedsolutions/wp-job-manager-company-facebook
+Plugin URI: https://github.com/Pressed-Solutions/WP-Job-Manager-Company-Facebook
 Description: Adds a company Facebook URL field to the Job Data when posting a new job.
 Version: 1.0.
 Author: Andrew Minion
@@ -19,11 +19,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// add Facebook icon styling
+if ( ! is_admin() ) {
+    wp_register_style( 'wp-job-manager-facebook', plugins_url( 'wp-job-manager-facebook.min.css', __FILE__), array( 'wp-job-manager-frontend' ) );
+    wp_enqueue_style( 'wp-job-manager-facebook' );
+}
+
 /**
  * Adds a company Facebook field
  */
-add_filter( 'submit_job_form_fields', 'wpjmcq_add_facebook' );
-function wpjmcq_add_facebook() {
+add_filter( 'submit_job_form_fields', 'wpjbFB_add_facebook' );
+function wpjbFB_add_facebook() {
     $fields['job']['company_facebook'] = array(
         'label' => __( 'Company Facebook', 'job_manager' ),
         'type' => 'text',
@@ -34,13 +40,13 @@ function wpjmcq_add_facebook() {
     return $fields;
 }
 // save submitted info
-add_action( 'job_manager_update_job_data', 'wpjmcq_add_facebook_save', 10, 2 );
-function wpjmcq_add_facebook_save( $job_id, $values ) {
+add_action( 'job_manager_update_job_data', 'wpjbFB_add_facebook_save', 10, 2 );
+function wpjbFB_add_facebook_save( $job_id, $values ) {
     update_post_meta( $job_id, '_company_facebook', $values['job']['company_facebook'] );
 }
 // add to admin metaboxes
-add_filter( 'job_manager_job_listing_data_fields', 'wpjmcq_admin_add_facebook' );
-function wpjmcq_admin_add_facebook( $fields ) {
+add_filter( 'job_manager_job_listing_data_fields', 'wpjbFB_admin_add_facebook' );
+function wpjbFB_admin_add_facebook( $fields ) {
     $fields['_company_facebook'] = array(
         'label' => __( 'Company Facebook', 'job_manager' ),
         'type' => 'text',
