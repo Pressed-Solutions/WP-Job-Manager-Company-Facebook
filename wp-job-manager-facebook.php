@@ -19,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// add Facebook icon styling
+if ( ! is_admin() ) {
+    wp_register_style( 'wp-job-manager-facebook', plugins_url( 'wp-job-manager-facebook.min.css', __FILE__), array( 'wp-job-manager-frontend' ) );
+    wp_enqueue_style( 'wp-job-manager-facebook' );
+}
+
 /**
  * Adds a company Facebook field
  */
