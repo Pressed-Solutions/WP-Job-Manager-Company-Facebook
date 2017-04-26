@@ -3,15 +3,11 @@
 Plugin Name: WP Job Manager - Company Facebook
 Plugin URI: https://github.com/Pressed-Solutions/WP-Job-Manager-Company-Facebook
 Description: Adds a company Facebook URL field to the Job Data when posting a new job.
-Version: 1.0.
-Author: Andrew Minion
-Author URI: http://andrewrminion.com
+Version: 1.0.1
+Author: AndrewRMinion Design
+Author URI: https://andrewrminion.com
 Requires at least: 3.8
-Tested up to: 4.0
-
-	Copyright: 2014 Andrew Minion
-	License: GNU General Public License v3.0
-	License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Tested up to: 4.7.3
 */
 
 // exit if accessed directly
@@ -52,7 +48,7 @@ function wpjbFB_admin_add_facebook( $fields ) {
     $fields['_company_facebook'] = array(
         'label' => __( 'Company Facebook', 'job_manager' ),
         'type' => 'text',
-        'placeholder' => __( 'Full Facebook URL, e.g. "http://facebook.com/example-page"', 'job_manager' ),
+        'placeholder' => __( 'Full Facebook URL, e.g. "https://facebook.com/example-page"', 'job_manager' ),
         'description' => ''
         );
     return $fields;
@@ -66,18 +62,18 @@ function wpjbFB_admin_add_facebook( $fields ) {
  * @return void
  */
 function the_company_facebook( $before = '', $after = '', $echo = true, $post = null ) {
-	$company_facebook = get_the_company_facebook( $post );
+    $company_facebook = get_the_company_facebook( $post );
 
-	if ( strlen( $company_facebook ) == 0 )
-		return;
+    if ( strlen( $company_facebook ) == 0 )
+        return;
 
-	$company_facebook = esc_attr( strip_tags( $company_facebook ) );
-	$company_facebook = $before . '<a href="' . $company_facebook . '" class="company_facebook" target="_blank">Facebook</a>' . $after;
+    $company_facebook = esc_attr( strip_tags( $company_facebook ) );
+    $company_facebook = $before . '<a href="' . $company_facebook . '" class="company_facebook" target="_blank">Facebook</a>' . $after;
 
-	if ( $echo )
-		echo $company_facebook;
-	else
-		return $company_facebook;
+    if ( $echo )
+        echo $company_facebook;
+    else
+        return $company_facebook;
 }
 
 /**
@@ -88,17 +84,17 @@ function the_company_facebook( $before = '', $after = '', $echo = true, $post = 
  * @return void
  */
 function get_the_company_facebook( $post = null ) {
-	$post = get_post( $post );
-	if ( $post->post_type !== 'job_listing' )
-		return;
+    $post = get_post( $post );
+    if ( $post->post_type !== 'job_listing' )
+        return;
 
-	$company_facebook = $post->_company_facebook;
+    $company_facebook = $post->_company_facebook;
 
-	if ( strlen( $company_facebook ) == 0 )
-		return;
+    if ( strlen( $company_facebook ) == 0 )
+        return;
 
-	if ( strpos( $company_facebook, '@' ) === 0 )
-		$company_facebook = substr( $company_facebook, 1 );
+    if ( strpos( $company_facebook, '@' ) === 0 )
+        $company_facebook = substr( $company_facebook, 1 );
 
-	return apply_filters( 'the_company_facebook', $company_facebook, $post );
+    return apply_filters( 'the_company_facebook', $company_facebook, $post );
 }
