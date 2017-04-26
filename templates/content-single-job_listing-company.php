@@ -6,12 +6,18 @@
  *
  * @since  1.14.0
  */
+
+if ( ! get_the_company_name() ) {
+    return;
+}
 ?>
 <div class="company" itemscope itemtype="http://data-vocabulary.org/Organization">
     <?php the_company_logo(); ?>
 
     <p class="name">
-        <a class="website" href="<?php echo get_the_company_website(); ?>" itemprop="url" target="_blank"><?php _e( 'Website', 'wp-job-manager' ); ?></a>
+        <?php if ( $website = get_the_company_website() ) : ?>
+            <a class="website" href="<?php echo esc_url( $website ); ?>" itemprop="url" target="_blank" rel="nofollow"><?php _e( 'Website', 'wp-job-manager' ); ?></a>
+        <?php endif; ?>
         <?php the_company_facebook(); ?>
         <?php the_company_twitter(); ?>
         <?php the_company_name( '<strong itemprop="name">', '</strong>' ); ?>
