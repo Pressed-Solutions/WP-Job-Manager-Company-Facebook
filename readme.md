@@ -1,8 +1,9 @@
-#Introduction
+# Introduction
 This plugin adds a Facebook URL field to the Job Data section when creating a new job using [WP Job Manager](https://wpjobmanager.com).
 
-#Requirements
+# Requirements
 - [WP Job Manager](http://wpjobmanager.com/) plugin
 
-#Installation
-- Copy the `templates/content-single-job_listing-company.php` file to your theme’s folder inside of a `job_manager/` folder (create if not present).
+# Installation
+- Install and activate this plugin
+- Copy the `templates/content-single-job_listing-company.php` file to `your-theme-folder/job_manager/` folder (create the `job_manager` folder if not present).
